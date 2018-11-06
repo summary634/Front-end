@@ -1,0 +1,16 @@
+*{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.black{
+	background: #263948;
+}
+a{
+	color: white;
+	text-decoration: none;
+}
+a:hover{
+	text-decoration: none;
+	color: white;
+}

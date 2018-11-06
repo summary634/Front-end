@@ -3,13 +3,21 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import $ from 'jquery'
+import axios from 'axios'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.min'
+import '@/assets/css/public.css'
+import '@/assets/font/iconfont.css'
 
-Vue.config.productionTip = false
+//axios.defaults.withCredentials=true
+Vue.prototype.$axios=axios
+//Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
-  components: { app },
-  template: '<app/>'
+  components: { App },
+  template: '<App/>'
 })

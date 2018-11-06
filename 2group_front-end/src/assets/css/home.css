@@ -1,0 +1,10 @@
+.home_left{
+	background: gold;
+	border: 1px solid #000000;
+	width: 200px;
+	height: 100%;
+}
+.home_right{
+	background: fuchsia;
+	border: 1px solid #000000;
+} 

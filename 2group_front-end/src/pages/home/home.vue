@@ -1,20 +1,39 @@
 <template>
-    <div id="home">
-      <h3>这是home</h3>
+    <div class="home row" >
+       <home-left></home-left>
+       <home-right></home-right>
     </div>
 </template>
 
 <script>
+import homeLeft from './components/home_left';
+import homeRight from './components/home_right';
+
   export default {
-    name: 'home'
+    name: 'home',
+    components:{
+      homeLeft,
+      homeRight
+    },
+    data:function(){
+    	return {header:0};
+    },
+    computed:{
+	 		newheader(){
+	 			this.header=window.screen.height;
+	 			return this.header-110;
+	 		}
+	 	},
+	 mounted:function(){
+	 	
+	 }
   }
 </script>
 
 <style>
-     #home{
-       width: 200px;
-       height: 200px;
-       background: red;
-       margin: 0 auto;
+     .home{
+       
+       margin: 0 auto;   
      }
+
 </style>
