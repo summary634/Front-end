@@ -25,8 +25,8 @@
 			 			<td>{{data.eId}}</td>
 			 			<td>{{data.department_dName}}</td>
 			 			<td><router-link :to="{path:'/home/infor_staff/archives',query:{eId:data.eId,name:data.eName}}" >{{data.eName}}</router-link></td>
-			 			<td>{{data.eSex}}</td>
-			 			<td>在职</td>
+			 			<td >{{data.eSex}}</td>
+			 			<td>{{data.eCondition}}</td>
 			 			<td>
 			 				<a href="#" @click="remove(data,index)">删除</a>
 			 				<router-link :to="{path:'/home/infor_staff/infor_modify',query:{eId:data.eId,name:data.eName}}">修改</router-link>
@@ -80,7 +80,7 @@
 					   
 					})
 				}
-				console.log(newdata)
+//				console.log(newdata)
 				 return newdata;
 				 
 			},
@@ -104,7 +104,7 @@
 					      	"eId":this.eId,
 					      },
 					      success: (res) => {
-					        console.log(res);
+//					        console.log(res);
 					        if(res.success==true){
 					        	this.newdata.splice(eindex,1)
 //					        	window.location.href = 'http://localhost:8086/#//home/infor_staff'
@@ -125,14 +125,23 @@
 		      })
 		      // .then为请求成功的回调函数
 		        .then(function (response) {
-		          if (response.status === 200) {	
-		          	if(response.data.data.objects=="0"){
-		            	response.data.data.objects=="女"
-		            }
-		            else{
-		            	response.data.data.objects=="男"
-		            }
-		            isthis.newdata=response.data.data.objects;
+		            if (response.status === 200) {	
+		          	    isthis.newdata=response.data.data.objects;
+		          	    
+		          	     isthis.newdata.forEach((value,item,arr)=>{
+//		          	     	console.log(value)
+		          	    	if(value.eSex==1&&value.eCondition==1){
+		          	    		value.eSex="男"
+		          	    		value.eCondition="在职"
+		          	    	}else{
+		          	    		value.eSex="女"
+		          	    		value.eCondition="离职"
+		          	    	}
+		          	    	
+		          	    	
+		          	    })
+//		          	    console.log(newdata)
+//		          	     console.log(isthis.newdata)
 		       
 		          }
 		        })

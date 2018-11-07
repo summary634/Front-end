@@ -117,9 +117,6 @@
       	 $.ajax({
 			      url: "http://39.108.75.4/hpms/public/admin/login",
 			      method: "post",
-//			      xhrFields: {
-//			        withCredentials: true
-//			      },
 			      data:{
 			      	'aName':aName,
 			      	'aPwd':aPwd
@@ -127,7 +124,8 @@
 			      success: (res) => {
 			      	if(res.success==true&&this.state==true){
 			      		
-			      		this.$router.push("/home")
+			      		this.$router.push("/home?aName="+aName)
+			      		console.log(this)
 			      	};
 			        
 			      },
@@ -135,26 +133,6 @@
 			        console.log(err);
 			      }
 			    })
-//    	 
-//    	 return;
-//      this.$axios({
-//      	method:'post',
-//      	url:'http://39.108.75.4/hpms/public/admin/login',
-//      	data:params, 
-//      })
-//      //请求成功数据
-//      .then((response)=>{
-//      	 if(response.status===200){
-//      	 	console.log(response.data)	 
-//      	 }
-//      })
-//      //请求失败信息
-//      .catch((erroe)=>{
-//      	 console.log(erroe)
-//      })
-//      console.log(this.state)
-
-
       },
       
     }

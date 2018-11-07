@@ -27,8 +27,8 @@
 			 					</div>
 			 					<div class="col-md-7 ">
 			 						
-			 						 <input type="radio" name="inlineRadioOptions" id="inlineRadio1"    ref="eSex" v-model="eSex" checked="checked" value="女"> 女
-			 						 <input type="radio" name="inlineRadioOptions" id="inlineRadio1"  ref="eSex" v-model="eSex" value="男"> 男
+			 						 <input type="radio" name="inlineRadioOptions" id="inlineRadio1"    ref="eSex" v-model="eSex" checked="checked" value="男">男 
+			 						 <input type="radio" name="inlineRadioOptions" id="inlineRadio1"  ref="eSex" v-model="eSex" value="女">女 
 			 						
 			 					</div>
 			 					<!---->
@@ -55,7 +55,7 @@
 			 						<label class="text-right">编号：</label>
 			 					</div>
 			 					<div class="col-md-7 ">
-			 						<select  class="form-control" id="input5" ref="department_dId" name="department_dId">
+			 						<select  class="form-control"  ref="department_dId" name="department_dId">
 			 						     <option> 请选择部门</option>
 	                                    <option :value="data.dId" v-for="data in newdata">{{data.dName}}</option>
 			 						</select>
@@ -122,6 +122,7 @@
 	 			var eEmail= this.$refs.eEmail.value
 	 			var department_dId= this.$refs.department_dId.value
 	 			
+	 			var eCondition=this.$refs.eCondition.value
 	 			if(this.$refs.eCondition.value=='在职'){
                 	  var	eCondition=1;
                 	}else{

@@ -60,7 +60,11 @@
 									<label class="text-right">部门编号：</label>
 								</div>
 								<div class="col-md-7 ">
-									<input type="text" v-model="data.department_dId" class="form-control" ref="department_dId" name="department_dId" placeholder="2" />
+									<select  class="form-control"  ref="dId" name="department_dId" v-model="data.dId">
+			 						     <option> 请选择部门</option>
+	                                    <option :value="data.dId" v-for="data in newdata">{{data.dId}}</option>
+			 						</select>
+									<!--<input type="text" v-model="data.department_dId" class="form-control" ref="department_dId" name="department_dId" placeholder="2" />-->
 								</div>
 								<!---->
 
@@ -107,7 +111,8 @@
 				eName:'',eBirthdate:'',eEmail:'',department_dId:'',eCondition:'',eStartTime:'',
 				eId: '',
 				data:[],
-				eSex:''
+				eSex:'',
+				newdata:'',
 
 			}
 		},
@@ -117,26 +122,30 @@
 			console.log(this.eId);
 		},
 		methods: {
-			updatastaff() {
+			updatastaff(){
 				var eName= this.$refs.eName.value
 	 			var eSex= this.eSex
 	 			var eBirthdate= this.$refs.eBirthdate.value
 	 			var eEmail= this.$refs.eEmail.value
-	 			var department_dId= this.$refs.department_dId.value
+	 			var department_dId= this.$refs.dId.value
 	 			
 	 			if(this.$refs.eCondition.value=='在职'){
-                	  var	eCondition=1;
+                	  var	eCondition=1;               	  
                 	}else{
                 	var	eCondition=0;
                 	}
+                if(this.eSex=="男"){
+                	var eSex=1;
+                }else{
+                	var eSex=0;
+                }
 //	 			var eCondition= this.$refs.eCondition.value
 	 			var eStartTime= this.$refs.eStartTime.value
 				console.log(eName, eSex, eBirthdate, eEmail, department_dId, eCondition, eStartTime)
                 var Sentence=((eName==''||eName==null)||
-                   (eSex==''||eSex==null)||
+             
                    (eBirthdate==''||eBirthdate==null)||
-                   (eEmail==''||eEmail==null)||
-                   
+                   (eEmail==''||eEmail==null)||                  
                    (eStartTime==''||eStartTime==null)
                 
                 )
@@ -172,29 +181,46 @@
 		},
 		created() {
 			this.eId = this.$route.query.eId;
-			console.log(this.eId )
+//			console.log(this.eId )
 			$.ajax({
 				url: "http://39.108.75.4/hpms/public/employee/getList",
 				method: "post",
 				data: {	
 					eId: this.eId,
 				},
-				
+				//
 				success: (res) => {
 //					console.log(res.data.objects);
 					this.data=res.data.objects[0];
-					if(this.data.eCondition==0){
+					if(this.data.eCondition==0&&this.data.eSex==0){
 						this.data.eCondition='离职';
+						this.data.eSex="女"
 					}else{
 						this.data.eCondition='在职';
+						this.data.eSex="男"
 					}
-					console.log(this.data);
+//					console.log(this.data);
 					
 				},
 				error: (err) => {
 					console.log(err);
 				}
 			})
+			//
+			$.ajax({
+	 			url: 'http://39.108.75.4/hpms/public/department/getAll',
+				method: "post",
+				
+				success: (res) => {
+					         this.newdata=res.data;
+//					       console.log(res.data);	
+//                           console.log(this.newdata)
+					      },
+					      error: (err) => {
+					        console.log(err);
+					      },
+					      
+	 		})
 			
 		}
 	}

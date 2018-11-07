@@ -1,10 +1,10 @@
 <template>
 	<div class="home_left_header col-md-12">
 		<img src="../../../assets/img/1.jpg" class="img-circle center-block"/> 
-		<span class="btn btn-default ">wl </span>
+		<span class="btn btn-default ">{{aName||ll}} </span>
 		<div class=" btn-group sign_out"> <i class="glyphicon glyphicon-chevron-right"></i>
 			<button class="btn dropdown-toggle btn_sign" data-toggle="dropdown" style="">
-				wl <span class="caret"></span>
+				{{aName||ll}} <span class="caret"></span>
 			</button>
 			<ul class="dropdown-menu">
 				<li><a href="#/" style="color: #0F0F0F;">安全退出</a></li>
@@ -17,9 +17,12 @@
 	export default{
 		name:'home_left_header',
 		data(){
-			return {}; 
+			return {
+				aName:''
+			};
 		},
 		methods:{
+			
 			Signout(){
 				this.$axios({
 		        	method:'post',
@@ -28,6 +31,7 @@
 		        //请求成功数据
 		        .then((response)=>{
 		        	 if(response.status===200){
+		        	 	
 		        	 	console.log(response.data)	
 		        	 }
 		        })
@@ -38,7 +42,8 @@
 			},
 		},
 		created(){
-			
+			this.aName = this.$route.query.aName;
+			console.log(this.aName);
 		}
 	}
 </script>
@@ -72,7 +77,7 @@
 		color: white;
 	}
 	.sign_out{
-		margin-left: 28px;
+		/*margin-left: 10px;*/
 		
 	}
 	.btn_sign{
