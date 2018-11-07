@@ -22,7 +22,7 @@
 									<label class="text-right">姓名：</label>
 								</div>
 								<div class="col-md-7 ">
-									<input type="text" v-model="data.eName" class="form-control" name="eName" ref="eName" placeholder="例：lisi">
+									<input type="text"  v-model="data.eName" class="form-control" name="eName" ref="eName" placeholder="例：lisi">
 								</div>
 								<!---->
 								<div class="col-md-3">
@@ -30,8 +30,8 @@
 								</div>
 								<div class="col-md-7 ">
 									<!--<select>-->
-									<input type="radio" name="inlineRadioOptions" id="inlineRadio1" ref="eSex" checked="eSex" value="女"> 女
-			 						 <input type="radio" name="inlineRadioOptions" id="inlineRadio1"  ref="eSex"   checked="eSex" value="男"> 男
+									<input type="radio" name="inlineRadioOptions" id="inlineRadio1" ref="eSex" v-model="eSex" checked="eSex" value="男"> 男
+			 						 <input type="radio" name="inlineRadioOptions" id="inlineRadio1"  ref="eSex" v-model="eSex"   value="女"> 女
 									<!--<option>公</option>
 		                                <option>农</option>
 			 						</select>-->
@@ -42,10 +42,10 @@
 									<label class="text-right">生日：</label>
 								</div>
 								<div class="col-md-7 ">
-									<select>
+									<!--<select>
 										<option>公</option>
 										<option>农</option>
-									</select>&nbsp;&nbsp;&nbsp;
+									</select>&nbsp;&nbsp;&nbsp;-->
 									<input type="date" id="input12" ref="eBirthdate" name="eBirthdate" v-model="data.eBirthdate">
 								</div>
 								<!---->
@@ -60,7 +60,7 @@
 									<label class="text-right">部门编号：</label>
 								</div>
 								<div class="col-md-7 ">
-									<input type="text" v-model="data.eId" class="form-control" ref="department_dId" name="department_dId" placeholder="2" />
+									<input type="text" v-model="data.department_dId" class="form-control" ref="department_dId" name="department_dId" placeholder="2" />
 								</div>
 								<!---->
 
@@ -77,7 +77,7 @@
 									<label class="text-right">状态：</label>
 								</div>
 								<div class="col-md-7 ">
-									<select class="form-control"  id="input5" ref="eCondition" name="eCondition">
+									<select class="form-control"  id="input5" ref="eCondition" name="eCondition" v-model="data.eCondition">
 										<option>请选择</option>
 										<option>在职</option>
 										<option>离职</option>
@@ -104,8 +104,10 @@
 		name: "modify",
 		data() {
 			return {
+				eName:'',eBirthdate:'',eEmail:'',department_dId:'',eCondition:'',eStartTime:'',
 				eId: '',
-				data:[]
+				data:[],
+				eSex:''
 
 			}
 		},
@@ -116,17 +118,36 @@
 		},
 		methods: {
 			updatastaff() {
+				
+				
 
-				var eName = this.$refs.eName.value
-				var eSex = this.$refs.eSex.value
-				var eBirthdate = this.$refs.eBirthdate.value
-				var eEmail = this.$refs.eEmail.value
-				var department_dId = this.$refs.department_dId.value
-				var eCondition = this.$refs.eCondition.value
-				var eStartTime = this.$refs.eStartTime.value
-
+				var eName= this.$refs.eName.value
+	 			var eSex= this.eSex
+	 			var eBirthdate= this.$refs.eBirthdate.value
+	 			var eEmail= this.$refs.eEmail.value
+	 			var department_dId= this.$refs.department_dId.value
+	 			
+	 			if(this.$refs.eCondition.value=='在职'){
+                	  var	eCondition=1;
+                	}else{
+                	var	eCondition=0;
+                	}
+//	 			var eCondition= this.$refs.eCondition.value
+	 			var eStartTime= this.$refs.eStartTime.value
 				console.log(eName, eSex, eBirthdate, eEmail, department_dId, eCondition, eStartTime)
-				$.ajax({
+                var Sentence=((eName==''||eName==null)||
+                   (eSex==''||eSex==null)||
+                   (eBirthdate==''||eBirthdate==null)||
+                   (eEmail==''||eEmail==null)||
+                   
+                   (eStartTime==''||eStartTime==null)
+                
+                )
+                if(Sentence){
+                	alert("内容不能为空！")
+                }else{
+                	
+                	$.ajax({
 					url: 'http://39.108.75.4/hpms/public/employee/update',
 					method: "post",
 					data: {
@@ -140,32 +161,37 @@
 						department_dId: department_dId,
 
 					},
-					//					      xhrFields: {
-					//					        withCredentials: true
-					//					      },
 					success: (res) => {
 						console.log(res);
+						this.$router.push("/home/infor_staff")
 					},
 					error: (err) => {
 						console.log(err);
 					}
 				})
+                }
+				
 			}
 		},
 		created() {
 			this.eId = this.$route.query.eId;
+			console.log(this.eId )
 			$.ajax({
 				url: "http://39.108.75.4/hpms/public/employee/getList",
 				method: "post",
 				data: {	
 					eId: this.eId,
 				},
-				//					      xhrFields: {
-				//					        withCredentials: true
-				//					      },
+				
 				success: (res) => {
-					console.log(res.data.objects);
+//					console.log(res.data.objects);
 					this.data=res.data.objects[0];
+					if(this.data.eCondition==0){
+						this.data.eCondition='离职';
+					}else{
+						this.data.eCondition='在职';
+					}
+					console.log(this.data);
 					
 				},
 				error: (err) => {

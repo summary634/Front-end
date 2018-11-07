@@ -32,9 +32,9 @@
     </div>
     
         <!--<router-link to="/home">-->
-        <div class="submit" @click="validate" style="cursor: pointer;">
+        <button class="submit" @click="validate" style="cursor: pointer;">
         	登录
-         </div>
+         </button>
         <!--</router-link>-->
    
   </div>
@@ -283,6 +283,8 @@
     color: #FFF;
     margin-top: 20px;
     background: #38B7E6;
+    width:80%;
+    outline: none;
   }
 
   .pic_img_wrap {
