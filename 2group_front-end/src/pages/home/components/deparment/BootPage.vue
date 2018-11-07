@@ -11,6 +11,8 @@
       <li v-if="cur == all"><a class="banclick">下一页</a></li>
       <li><a v-on:click="cur=all,pageClick()">尾页</a></li>
       <li><a>共<i>{{all}}</i>页</a></li>
+      <li><a>每页显示<i>{{onepagenum}}</i>条</a></li>
+
     </ul>
   </div>
 </template>

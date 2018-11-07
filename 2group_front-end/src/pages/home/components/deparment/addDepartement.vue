@@ -87,7 +87,7 @@
               if (response.status === 200) {
                 if (response.data.codeInfo === '添加成功') {
                   alert('部门添加成功');
-                  window.location.href = 'http://localhost:8086/#/home/DepartmentList'
+                  window.location.href = 'http://localhost:8080/#/home/DepartmentList'
                 } else {
                   alert('部门已存在')
                 }

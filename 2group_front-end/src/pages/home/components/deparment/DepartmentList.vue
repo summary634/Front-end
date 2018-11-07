@@ -26,7 +26,7 @@
             <td>{{ department.dName }}</td>
             <td>{{ department.dLeaderName }}</td>
             <td>{{ department.dLeaderEmail }}</td>
-            <td><router-link :to="{path:'/ChangeDepartment',query:{id:department.dId,Dname:department.dName,Duser:department.dLeaderName,Dinfo:department.dIntroduce,Demail:department.dLeaderEmail}}">修改</router-link>
+            <td><router-link :to="{path:'/home/DepartmentList/ChangeDepartment',query:{id:department.dId,Dname:department.dName,Duser:department.dLeaderName,Dinfo:department.dIntroduce,Demail:department.dLeaderEmail}}">修改</router-link>
               |
               <a href="##" data-target="#myModal" data-toggle="modal" @click="del(department,index)">删除</a>
             </td>
@@ -43,7 +43,7 @@
             </div>
             <div class="modal-body">
               <form action="/DepartmentList" method="post">
-                <label><b>{{b_name}}</b> 将要被删除,请选择将该部门{{yuangongnum}}名员工转移到</label>
+                <label><b>{{b_name}}</b> 将要被删除,请选择将该部门 <b>{{yuangongnum}}</b> 名员工转移到</label>
                 <input type="hidden" v-model="b_id" name="dId" id="dId" ref="delname">
                 <select name="dName" id="dName" ref="selectname">
                   <template v-for="department of departments">
@@ -107,7 +107,7 @@ export default {
           if (response.status === 200) {
             let data = response.data.data
             isthis.departments = data
-            console.log(response)
+            // console.log(response)
           }
         })
         // .catch为请求失败的回调函数
@@ -130,7 +130,7 @@ export default {
       const isthis = this
       this.$axios({
         method: 'post',
-        url: 'http://39.108.75.4/hpms/public/employee/getList',
+        url: 'http://localhost:8086/employee/getList',
         data:{
           department_dId:bumenid
         }
@@ -139,6 +139,7 @@ export default {
         .then(function (response) {
           if (response.status === 200) {
             isthis.yuangongnum = response.data.data.objects.length;
+            console.log(isthis.yuangongnum)
           }
         })
         // .catch为请求失败的回调函数
@@ -153,7 +154,7 @@ export default {
       let isthis = this
       this.$axios({
         method: 'post',
-        url: 'http://39.108.75.4/hpms/public/department/delete',
+        url: 'http://localhost:8086/department/delete',
         data: {
           from_dId: delbumenid,
           to_dId: selectbumenid

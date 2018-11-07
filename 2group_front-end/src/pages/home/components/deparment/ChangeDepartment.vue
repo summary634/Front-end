@@ -71,7 +71,7 @@ export default {
           if (response.status === 200) {
             if (response.data.codeInfo === '修改成功') {
               alert('部门修改成功')
-              window.location.href = 'http://localhost:8086/#/home/DepartmentList'
+              window.location.href = 'http://localhost:8080/#/home/DepartmentList'
             } else {
               alert('部门已存在')
             }
