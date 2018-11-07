@@ -8,7 +8,7 @@
         <input type="text" class="bumen_select" id="bumen_select" @blur="findDepartment" ref="SelectDepartment">
         <hr />
        </h6>
-
+        
       </div>
       <table class="table bumen_list_table table-bordered table-hover text-center">
         <thead>
@@ -38,16 +38,16 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title" id="myModalLabel">确认删除</h4>
+              <h4 class="modal-title" id="myModalLabel">删除部门</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
               <form action="/DepartmentList" method="post">
-                <label><b>{{b_name}}</b> 将要被删除,请选择将该部门{{yuangongnum}}名员工转移到</label>
+                <label><b>{{b_name}}</b> 将要被删除,请选择将该部门所有员工转移到</label>
                 <input type="hidden" v-model="b_id" name="dId" id="dId" ref="delname">
                 <select name="dName" id="dName" ref="selectname">
                   <template v-for="department of departments">
-                    <option :value="department.dId" v-if="department.dName != b_name">{{ department.dName }}</option>
+                    <option :value="department.dId">{{ department.dName }}</option>
                   </template>
                 </select>
                 <div class="modal-footer">
@@ -79,8 +79,7 @@ export default {
       b_id: '', // 被删除的部门ID
       b_name: '', // 被删除的部门名
       selectdName: '', // 员工被转移到的部门名
-      delindex: '',// 被删除的部门所在数组的下标
-      yuangongnum:'' //被删除部门的员工数
+      delindex: ''// 被删除的部门所在数组的下标
     }
   },
   mounted: function () {
@@ -107,7 +106,6 @@ export default {
           if (response.status === 200) {
             let data = response.data.data
             isthis.departments = data
-            console.log(response)
           }
         })
         // .catch为请求失败的回调函数
@@ -126,26 +124,6 @@ export default {
       this.b_id = bumenid
       this.b_name = bumenname
       this.delindex = index
-      //查询被删除部门的员工数
-      const isthis = this
-      this.$axios({
-        method: 'post',
-        url: 'http://39.108.75.4/hpms/public/employee/getList',
-        data:{
-          department_dId:bumenid
-        }
-      })
-      // .then为请求成功的回调函数
-        .then(function (response) {
-          if (response.status === 200) {
-            isthis.yuangongnum = response.data.data.objects.length;
-          }
-        })
-        // .catch为请求失败的回调函数
-        .catch(function (error) {
-          console.log(error)
-        })
-
     },
     queren () {
       let selectbumenid = this.$refs.selectname.value
@@ -153,7 +131,7 @@ export default {
       let isthis = this
       this.$axios({
         method: 'post',
-        url: 'http://39.108.75.4/hpms/public/department/delete',
+        url: 'http://localhost:8086/department/delete',
         data: {
           from_dId: delbumenid,
           to_dId: selectbumenid

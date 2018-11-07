@@ -1,10 +1,10 @@
 <template>
 	<div class="home_left_header col-md-12">
 		<img src="../../../assets/img/1.jpg" class="img-circle center-block"/> 
-		<span class="btn btn-default ">{{aName||ll}} </span>
+		<span class="btn btn-default ">{{aName||name}} </span>
 		<div class=" btn-group sign_out"> <i class="glyphicon glyphicon-chevron-right"></i>
 			<button class="btn dropdown-toggle btn_sign" data-toggle="dropdown" style="">
-				{{aName||ll}} <span class="caret"></span>
+				{{aName||name}} <span class="caret"></span>
 			</button>
 			<ul class="dropdown-menu">
 				<li><a href="#/" style="color: #0F0F0F;">安全退出</a></li>
@@ -18,7 +18,8 @@
 		name:'home_left_header',
 		data(){
 			return {
-				aName:''
+				aName:'',
+				name:'admin'
 			};
 		},
 		methods:{

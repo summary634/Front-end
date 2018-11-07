@@ -143,7 +143,7 @@
                 	alert("字段不能为空！")
                 }else{
                 	$.ajax({
-					      url: 'http://39.108.75.4/hpms/public/employee/add',
+					      url: 'http://localhost:8086/employee/add',
 					      method: "post",
 					      data: {
 					        eName: eName,
@@ -170,7 +170,7 @@
 	 	},
 	 	created(){
 	 		$.ajax({
-	 			url: 'http://39.108.75.4/hpms/public/department/getAll',
+	 			url: 'http://localhost:8086/department/getAll',
 				method: "post",
 				
 				success: (res) => {

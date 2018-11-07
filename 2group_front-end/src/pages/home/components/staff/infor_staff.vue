@@ -98,7 +98,7 @@
 //				var params = new URLSearchParams()
 //				 params.append("eId",this.eId) 
 				 $.ajax({
-					      url: 'http://39.108.75.4/hpms/public/employee/delete',
+					      url: 'http://localhost:8086/employee/delete',
 					      method: "post",
 					      data: {
 					      	"eId":this.eId,
@@ -121,7 +121,7 @@
 		      const isthis = this
 		      this.$axios({
 		        method: 'post',
-		        url: 'http://39.108.75.4/hpms/public/employee/getList',
+		        url: 'http://localhost:8086/employee/getList',
 		      })
 		      // .then为请求成功的回调函数
 		        .then(function (response) {

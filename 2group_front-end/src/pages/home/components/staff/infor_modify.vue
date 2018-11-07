@@ -70,12 +70,12 @@
 
 								<!---->
 
-								<div class="col-md-3">
+								<!--<div class="col-md-3">
 									<label class="text-right">入职日期：</label>
 								</div>
 								<div class="col-md-7 ">
 									<input type="date" v-model="data.eStartTime" class="form-control" ref="eStartTime" name="eStartTime" placeholder="例：2018-06-13">
-								</div>
+								</div>-->
 								<!---->
 								<div class="col-md-3">
 									<label class="text-right">状态：</label>
@@ -123,6 +123,7 @@
 		},
 		methods: {
 			updatastaff(){
+				var eId=this.$route.query.eId
 				var eName= this.$refs.eName.value
 	 			var eSex= this.eSex
 	 			var eBirthdate= this.$refs.eBirthdate.value
@@ -140,13 +141,13 @@
                 	var eSex=0;
                 }
 //	 			var eCondition= this.$refs.eCondition.value
-	 			var eStartTime= this.$refs.eStartTime.value
-				console.log(eName, eSex, eBirthdate, eEmail, department_dId, eCondition, eStartTime)
+//	 			var eStartTime= this.$refs.eStartTime.value
+				console.log(eId,eName, eSex, eBirthdate, eEmail, department_dId, eCondition)
                 var Sentence=((eName==''||eName==null)||
              
                    (eBirthdate==''||eBirthdate==null)||
-                   (eEmail==''||eEmail==null)||                  
-                   (eStartTime==''||eStartTime==null)
+                   (eEmail==''||eEmail==null)                 
+//                 (eStartTime==''||eStartTime==null)
                 
                 )
                 if(Sentence){
@@ -154,18 +155,17 @@
                 }else{
                 	
                 	$.ajax({
-					url: 'http://39.108.75.4/hpms/public/employee/update',
+					url: 'http://localhost:8086/employee/update',
 					method: "post",
 					data: {
-						eTd: this.eId,
+						eId: eId,
 						eName: eName,
 						eBirthdate: eBirthdate,
 						eEmail: eEmail,
 						eSex: eSex,
 						eCondition: eCondition,
-						eStartTime: eStartTime,
+//						eStartTime: eStartTime,
 						department_dId: department_dId,
-
 					},
 					success: (res) => {
 						console.log(res);
@@ -181,15 +181,16 @@
 		},
 		created() {
 			this.eId = this.$route.query.eId;
-//			console.log(this.eId )
+			console.log(this.eId )
 			$.ajax({
-				url: "http://39.108.75.4/hpms/public/employee/getList",
+				url: "http://localhost:8086/employee/getList",
 				method: "post",
 				data: {	
 					eId: this.eId,
 				},
 				//
 				success: (res) => {
+//					console.log(res)
 //					console.log(res.data.objects);
 					this.data=res.data.objects[0];
 					if(this.data.eCondition==0&&this.data.eSex==0){
@@ -208,7 +209,7 @@
 			})
 			//
 			$.ajax({
-	 			url: 'http://39.108.75.4/hpms/public/department/getAll',
+	 			url: 'http://localhost:8086/department/getAll',
 				method: "post",
 				
 				success: (res) => {
