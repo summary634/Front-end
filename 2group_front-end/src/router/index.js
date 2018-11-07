@@ -7,8 +7,7 @@ import add_staff from '@/pages/home/components/staff/add_staff'
 import infor_staff from '@/pages/home/components/staff/infor_staff'
 import archives from '@/pages/home/components/staff/archives'
 import infor_modify from '@/pages/home/components/staff/infor_modify'
-//import entry from '@/pages/home/components/staff/entry'
-
+//主页
 import home_right_content from '@/pages/home/components/home_right_content'
 import home_right_footer from '@/pages/home/components/home_right_footer'
 import loginCount from '@/pages/home/login/logincount'
@@ -18,9 +17,12 @@ import addDepartement from '@/pages/home/components/deparment/addDepartement'
 import DepartmentList from '@/pages/home/components/deparment/DepartmentList'
 import BootPage from '@/pages/home/components/deparment/BootPage'
 import ChangeDepartment from '@/pages/home/components/deparment/ChangeDepartment'
+//数据图表
+import chart_staff from '@/pages/home/components/charts/chart_staff'
+import chart_deparment from '@/pages/home/components/charts/chart_deparment'
+
 
 Vue.use(Router)
-
 
 
 export default new Router({
@@ -96,7 +98,7 @@ export default new Router({
         name:"home",
         component:home,
         children:[
-        
+              //员工添加
 			               {
 				      	path:'/home/add_staff',
 				      	name:'add_staff',
@@ -105,6 +107,7 @@ export default new Router({
 				      	        
 				      	]
 				      },
+				      //员工列表
 				       {
 				      	path:'/home/infor_staff',
 				      	name:'infor_staff',
@@ -114,6 +117,7 @@ export default new Router({
 				      	    
 				      	]
 				      },
+				      //部门添加
 				     {
 				      	path:'/home/addDepartement',
 				      	name:'addDepartement',
@@ -123,6 +127,7 @@ export default new Router({
 				      	    
 				      	]
 				      },
+				      //部门列表
 				      {
 				      	path:'/home/DepartmentList',
 				      	name:'DepartmentList',
@@ -131,7 +136,20 @@ export default new Router({
 				      	   			
 				      	    
 				      	]
-				      }
+				      },
+				      
+				       {
+				      	path:'/home/chart_deparment',
+				      	name:'chart_deparment',
+				      	component:chart_deparment,
+				      	children:[   	]
+				      },
+				       {
+				      	path:'/home/chart_staff',
+				      	name:'chart_staff',
+				      	component:chart_staff,
+				      	children:[   	]
+				      },
         ]
       },
       //登录路由

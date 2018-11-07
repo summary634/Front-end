@@ -13,6 +13,7 @@
 				<router-link to="/home/DepartmentList">部门信息</router-link>
 			</ul>
 		</div>
+		<!--员工管理-->
 		<div class="staff" style="margin-top: 30px;">
 			 <div class="title">
 			 	<div class="font-circle1">
@@ -26,6 +27,22 @@
 			 <ul style="display: none;">
 				<router-link to="/home/add_staff">添加员工</router-link><br />
 				<router-link to="/home/infor_staff">员工信息</router-link>
+			</ul>
+		</div>
+		<!--图表-->
+		<div class="chart" style="margin-top: 30px;">
+			 <div class="title">
+			 	<div class="font-circle1">
+			 		<span class="iconfont icon-duorenyonghu color-blue" style="color: ;"></span>
+			 	</div>
+			 	
+			 	&nbsp;数据图表 &nbsp; &nbsp; &nbsp;<span class="iconfont icon-jiantouarrowhead7">
+			 		
+			 	</span>
+			 </div>
+			 <ul style="display: none;">
+				<router-link to="/home/chart_deparment">部门图表</router-link><br />
+				<router-link to="/home/chart_staff">员工图表</router-link>
 			</ul>
 		</div>
 	</div>
@@ -50,7 +67,13 @@
 					$(this).parent("div").toggleClass("black");
 					$(".staff span").toggleClass("icon-jiantouarrowhead7").addClass("icon-jiantouarrow483");
 					$(".font-circle1 span").toggleClass("color-blue");
-				})
+				});
+				$(".chart .title").on("click",function(){
+					$(".chart ul").slideToggle(500);
+					$(this).parent("div").toggleClass("black");
+					$(".chart span").toggleClass("icon-jiantouarrowhead7").addClass("icon-jiantouarrow483");
+					$(".font-circle1 span").toggleClass("color-blue");
+				});
 			})
 		}
 		
@@ -65,7 +88,7 @@
 		/*height: 480px;*/
 		padding-top: 38px;
 	}
-	.department .title,.staff .title{
+	.department .title,.staff .title,.chart .title{
 		cursor: pointer;
 		overflow: hidden;
 		display: flex;
@@ -89,8 +112,7 @@
 	.color-black{
 		color: black;
 	}
-	.department{
-		background: ;
+	.department,.staff,.chart{
 		color: white;
 	}
 	.staff{
