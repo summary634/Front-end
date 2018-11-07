@@ -1,11 +1,10 @@
 <template>
 	<div class="infor_staff">
-		
+
 		<div class="infor_header">
 			<h6 class="staff_link text-left" >
 				<router-link to='/home/add_staff'><b>添加员工</b></router-link>
 				<router-link to='/home/infor_staff'><b>员工信息</b></router-link>
-				<label style="margin-left: 150px;"><b>请输入：</b><input @keyup="query()" v-model="ckey" type="text" /></label>
 			</h6>
 			<hr />
 			<!--查看员工信息-->
@@ -20,7 +19,7 @@
 						<th>状态</th>
 			 			<th>操作</th>
 			 		</tr>
-			 		<template v-for="(data,index) in (query().slice(beginnum,overnum))">
+			 		<template v-for="(data,index) in (newdata.slice(beginnum,overnum))">
 			 		<tr>
 			 			<td>{{data.eId}}</td>
 			 			<td>{{data.department_dName}}</td>
@@ -50,71 +49,68 @@
 		data:function(){
 			return {
 				newdata:[],
+        delindex:'',//存放被删除员工在newdata中的下标
 				eId:'',
-				ckey:'',
+				// departments: '', // 获取的部门信息
 		        all: '0', // 总页数
 		        onepagenum: '5', // 每页条数
 		        beginnum: '0', // 开始下标
-		        overnum: '5', // 结束下标 
+		        overnum: '5', // 结束下标
 			};
 		},
-		updated: function () {
-	      this.all = Math.ceil(this.newdata.length / this.onepagenum)
-	   },
+    updated: function () {
+      this.all = Math.ceil(this.newdata.length / this.onepagenum)
+    },
 		methods:{
-			//查询
-			query(){
-				var newdata=[]
-				if(this.ckey.trim()==''){
-					newdata=this.newdata;
-				}else{
-					newdata=this.newdata.filter((item)=>{
-						
-					    var value=((item.eName.includes(this.ckey.trim()))||
-					      (item.department_dName.includes(this.ckey.trim()))
-					    )
-					    if(value){
-//					    	console.log(item)
-					    	return item
-					    }
-					   
-					})
-				}
-				console.log(newdata)
-				 return newdata;
-				 
-			},
 		 	//删除员工
 			remove(data,index){
+        this.delindex = index
 				this.eId=data.eId
 				console.log(this.eId)
-				var eindex=this.newdata.findIndex((item,index)=>{
-					if(this.eId==item.eId){
-						return true;
-					}
-				})
-				console.log(eindex)
-//				this.newdata.splice(data.eId,1)
 //				var params = new URLSearchParams()
-//				 params.append("eId",this.eId) 
+//				 params.append("eId",this.eId)
 				 $.ajax({
 					      url: 'http://39.108.75.4/hpms/public/employee/delete',
 					      method: "post",
 					      data: {
 					      	"eId":this.eId,
 					      },
+//					      xhrFields: {
+//					        withCredentials: true
+//					      },
 					      success: (res) => {
 					        console.log(res);
 					        if(res.success==true){
-					        	this.newdata.splice(eindex,1)
 //					        	window.location.href = 'http://localhost:8086/#//home/infor_staff'
-					        	this.$router.push("/home/infor_staff")	
+// 					        	this.$router.push("/home/infor_staff")
+                    this.newdata.splice(this.delindex, 1)
 					        }
 					      },
 					      error: (err) => {
 					        console.log(err);
 					      }
-					   })
+					    })
+//				  this.$axios({
+//				        method: 'post',
+//				        url: 'http://39.108.75.4/hpms/public/employee/delete',
+//				        data:params
+//				  })
+//				      // .then为请求成功的回调函数
+//				    .then( (response)=> {
+//				          if (response.status === 200) {
+//				               if(response.data.success==true){
+////				               	this.$router.push("/home/infor_staff")
+//
+//									this.$router.push("/home/infor_staff")
+//				               }
+//
+//				          }
+//				    })
+//				        // .catch为请求失败的回调函数
+//				    .catch(function (error) {
+//				          console.log(error)
+//				     })
+
 			},
 			//浏览员工
 			findDepartment () {
@@ -122,18 +118,15 @@
 		      this.$axios({
 		        method: 'post',
 		        url: 'http://39.108.75.4/hpms/public/employee/getList',
+		        // url: 'http://39.108.75.4/hpms/public/employee/getList',
 		      })
 		      // .then为请求成功的回调函数
 		        .then(function (response) {
-		          if (response.status === 200) {	
-		          	if(response.data.data.objects=="0"){
-		            	response.data.data.objects=="女"
-		            }
-		            else{
-		            	response.data.data.objects=="男"
-		            }
+		          if (response.status === 200) {
+//		            console.log(response.data.data.objects);
+//		            console.log(response);
 		            isthis.newdata=response.data.data.objects;
-		       
+//		            console.log(isthis.newdata);
 		          }
 		        })
 		        // .catch为请求失败的回调函数

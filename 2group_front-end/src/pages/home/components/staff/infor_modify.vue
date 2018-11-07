@@ -118,9 +118,6 @@
 		},
 		methods: {
 			updatastaff() {
-				
-				
-
 				var eName= this.$refs.eName.value
 	 			var eSex= this.eSex
 	 			var eBirthdate= this.$refs.eBirthdate.value
