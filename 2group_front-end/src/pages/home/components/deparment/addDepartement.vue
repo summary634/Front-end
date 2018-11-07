@@ -1,8 +1,8 @@
 <template>
   <div class="AddDepartement">
     <h6 class="staff_link text-left" >
-      <router-link to='/home/add_staff'><b>添加员工</b></router-link>
-      <router-link to='/home/infor_staff'><b>员工信息</b></router-link>
+      <router-link to='/home/addDepartement'><b>添加部门</b></router-link>
+      <router-link to='/home/DepartmentList'><b>部门信息</b></router-link>
     </h6>
     <hr />
     <!--添加员工-->

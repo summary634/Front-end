@@ -1,8 +1,14 @@
 <template>
     <div>
       <div class="bumen_list_head text-right">
-        <label for="bumen_select">请输入关键字查询：</label>
+      	<h6 class="staff_link text-left" >
+	      <router-link to='/home/addDepartement'><b>添加部门</b></router-link>
+	      <router-link to='/home/DepartmentList'><b>部门信息</b></router-link>
+	      <label style="margin-left: 150px;" for="bumen_select">请输入关键字查询：</label>
         <input type="text" class="bumen_select" id="bumen_select" @blur="findDepartment" ref="SelectDepartment">
+        <hr />
+       </h6>
+        
       </div>
       <table class="table bumen_list_table table-bordered table-hover text-center">
         <thead>
