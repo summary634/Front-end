@@ -46,8 +46,9 @@
 							for(var keys in count){
 								arr.push(count[keys])
 							}
-							console.log(newdata)
-							console.log(dNameLength)
+//							console.log(newdata)
+//							console.log(dNameLength)
+                            newdata.sort();
 							console.log(arr)		            
 							//员工数据图表
 							if(true){
