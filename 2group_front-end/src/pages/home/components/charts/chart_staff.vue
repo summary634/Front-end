@@ -1,9 +1,7 @@
 <template>
-	<div class="ehart_staff" id="ehart_staff" >
-		
+	<div class="ehart_staff" id="ehart_staff" >		
 	</div>
 </template>
-
 <script>
 	export default{
 		name:'ehart_staff',
@@ -12,28 +10,25 @@
 				data:'',
 			}
 		},
-		mounted(){
-			
+		mounted(){			
 		},
 		created(){
 			$.ajax({
-						url:'http://localhost:8088/employee/getList',
-						method: "post",
-						success:(res)=>{	
-							let newdata=[]	 //接受部门名称(去重)
-							let dNameLength=[]  //接收部门名称（没去重）
-							let arr=[]     //接受每个部门的人数
-							
-							//获取数据
-							res.data.objects.forEach((value,item)=>{
-								console.log(value)
-								let dName=value.eStartTime
-								if(newdata.indexOf(dName )== -1){
-									 newdata.push(dName)						 
-								}
+				url:'http://localhost:8088/employee/getList',
+				method: "post",
+				success:(res)=>{	
+					let newdata=[]	 //接受部门名称(去重)
+					let dNameLength=[]  //接收部门名称（没去重）
+					let arr=[]     //接受每个部门的人数							
+					//获取数据
+					res.data.objects.forEach((value,item)=>{
+						console.log(value)
+						let dName=value.eStartTime
+						if(newdata.indexOf(dName )== -1){
+							newdata.push(dName)						 
+							}
 								dNameLength.push(dName)
 							})
-//							let length=dNameLength.length
 							//统计每个部门元素
 							var count = dNameLength.reduce(function(allElements, ele){
 							    if (ele in allElements) {
@@ -46,8 +41,6 @@
 							for(var keys in count){
 								arr.push(count[keys])
 							}
-//							console.log(newdata)
-//							console.log(dNameLength)
                             newdata.sort();
 							console.log(arr)		            
 							//员工数据图表
@@ -77,13 +70,10 @@
 				})	
 		},
 		methods:{
-			drawLine(){
-				
-				console.log(this.data)
-				
+			drawLine(){				
+				console.log(this.data)				
 			}
-		}
-		
+		}		
 	}
 </script>
 
@@ -92,6 +82,5 @@
 		margin: 0 auto;
 		width: 90%;
 		height: 70%;
-		/*background: #FFD700;*/
 	}
 </style>

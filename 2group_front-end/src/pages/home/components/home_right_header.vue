@@ -11,7 +11,6 @@
 	.home_right_header{
 		background: #057fca;
 		height: 5%;
-		/*height: 50px;*/
 		padding-top: 10px;
 	}
 </style>

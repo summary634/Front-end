@@ -28,10 +28,6 @@
 
 <style scoped>
    .home_left{
-   	
-	/*border: 1px solid #000000;*/
-	/*width: 200px;*/
-	/*height: 100%;*/
 	padding: 0;
 	margin: 0;
    }

@@ -22,8 +22,7 @@
 				name:'admin'
 			};
 		},
-		methods:{
-			
+		methods:{			
 			Signout(){
 				this.$axios({
 		        	method:'post',
@@ -53,7 +52,6 @@
 	.home_left_header img{
 		width: 100px;
 		height: 100px;
-		/*border: 1px solid #000000;*/
 		border-radius: 50%;
 		margin-top: 10px;
 	}
@@ -67,19 +65,15 @@
 		padding: 10px 0 0 30px;
 		background: #263948;
 	}
-	.home_left_header span{
-		/*border: 1px solid #000000;*/
+	.home_left_header span{		
 		width: 50%;
 		height: 30px;
-		/*margin-top: 10px;*/
 		color: white;
 	}
 	.home_left_header i{
 		color: white;
 	}
-	.sign_out{
-		/*margin-left: 10px;*/
-		
+	.sign_out{				
 	}
 	.btn_sign{
 		outline: none;

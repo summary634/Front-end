@@ -10,11 +10,9 @@
 <style>
 	.home_right_footer{
 		height: 5%;
-		background: #fff;
-		
+		background: #fff;		
 	}
 	.home_right_footer p{
-		/*line-height: 20px;*/
 		color: #057fca;
 	}
 </style>

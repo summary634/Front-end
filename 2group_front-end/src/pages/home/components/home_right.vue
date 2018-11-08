@@ -1,6 +1,5 @@
 <template>
-    <div class="home_right col-md-10 col-sm-10 col-xs-10" >
-	    
+    <div class="home_right col-md-10 col-sm-10 col-xs-10" >	    
 	      <home-right-header></home-right-header>
           <router-view></router-view>
           <home-right-footer></home-right-footer>
@@ -8,15 +7,13 @@
 </template>
 
 <script>
-	import homeRightHeader from './home_right_header';
-	import homeRightContent from './home_right_content';
+	import homeRightHeader from './home_right_header';	
 	import homeRightFooter from './home_right_footer';
 	
     export default {
         name: "home_right",
         components:{
-        	homeRightHeader,
-        	homeRightContent,
+        	homeRightHeader,       	
         	homeRightFooter
         },
         data:function(){
@@ -32,8 +29,7 @@
 </script>
 
 <style scoped>
-   .home_right{
-   
+   .home_right{   
    	background: #F3F3F3;
    	border: 1px solid #000000;
    	margin: 0;

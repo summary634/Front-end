@@ -11,13 +11,11 @@
 			<div class="infor_row">
 				<!--<hr />-->
 				<div class="infor_row">
-					<!--<hr />-->
-					<!--<form action="http://39.108.75.4/hpms/public/employee/add" method="post">-->
+					<!--<hr />-->		
 					<div class="row">
 						<div class="col-md-10">
 							<div class="row row_col">
 								<!---->
-								<!--{{data}}-->
 								<div class="col-md-3">
 									<label class="text-right">姓名：</label>
 								</div>
@@ -29,12 +27,8 @@
 									<label class="text-right">性别：</label>
 								</div>
 								<div class="col-md-7 ">
-									<!--<select>-->
-									<input type="radio" name="inlineRadioOptions" id="inlineRadio1" ref="eSex" v-model="eSex" checked="eSex" value="男"> 男
-			 						 <input type="radio" name="inlineRadioOptions" id="inlineRadio1"  ref="eSex" v-model="eSex"   value="女"> 女
-									<!--<option>公</option>
-		                                <option>农</option>
-			 						</select>-->
+									<input type="radio" name="inlineRadioOptions "  ref="eSex" v-model="eSex" checked value="男"> 男
+			 						 <input type="radio" name="inlineRadioOptions "   ref="eSex" v-model="eSex"   value="女"> 女
 								</div>
 								<!---->
 								<!---->
@@ -42,10 +36,6 @@
 									<label class="text-right">生日：</label>
 								</div>
 								<div class="col-md-7 ">
-									<!--<select>
-										<option>公</option>
-										<option>农</option>
-									</select>&nbsp;&nbsp;&nbsp;-->
 									<input type="date" id="input12" ref="eBirthdate" name="eBirthdate" v-model="data.eBirthdate">
 								</div>
 								<!---->
@@ -61,21 +51,11 @@
 								</div>
 								<div class="col-md-7 ">
 									<select  class="form-control"  ref="dId" name="department_dId" v-model="data.dId">
-			 						     <option> 请选择部门</option>
+			 						    <option> 请选择部门</option>
 	                                    <option :value="data.dId" v-for="data in newdata">{{data.dId}}</option>
-			 						</select>
-									<!--<input type="text" v-model="data.department_dId" class="form-control" ref="department_dId" name="department_dId" placeholder="2" />-->
+			 					</select>									
 								</div>
 								<!---->
-
-								<!---->
-
-								<!--<div class="col-md-3">
-									<label class="text-right">入职日期：</label>
-								</div>
-								<div class="col-md-7 ">
-									<input type="date" v-model="data.eStartTime" class="form-control" ref="eStartTime" name="eStartTime" placeholder="例：2018-06-13">
-								</div>-->
 								<!---->
 								<div class="col-md-3">
 									<label class="text-right">状态：</label>
@@ -113,11 +93,9 @@
 				data:[],
 				eSex:'',
 				newdata:'',
-
 			}
 		},
 		mounted: function() {
-			//			console.log(1);
 			this.eId = this.$route.query.eId;
 			console.log(this.eId);
 		},
@@ -140,20 +118,14 @@
                 }else{
                 	var eSex=0;
                 }
-//	 			var eCondition= this.$refs.eCondition.value
-//	 			var eStartTime= this.$refs.eStartTime.value
 				console.log(eId,eName, eSex, eBirthdate, eEmail, department_dId, eCondition)
-                var Sentence=((eName==''||eName==null)||
-             
+                var Sentence=((eName==''||eName==null)||           
                    (eBirthdate==''||eBirthdate==null)||
-                   (eEmail==''||eEmail==null)                 
-//                 (eStartTime==''||eStartTime==null)
-                
+                   (eEmail==''||eEmail==null)                  
                 )
                 if(Sentence){
                 	alert("内容不能为空！")
-                }else{
-                	
+                }else{               	
                 	$.ajax({
 					url: 'http://localhost:8088/employee/update',
 					method: "post",
@@ -164,7 +136,6 @@
 						eEmail: eEmail,
 						eSex: eSex,
 						eCondition: eCondition,
-//						eStartTime: eStartTime,
 						department_dId: department_dId,
 					},
 					success: (res) => {
@@ -175,8 +146,7 @@
 						console.log(err);
 					}
 				})
-                }
-				
+                }				
 			}
 		},
 		created() {
@@ -190,18 +160,19 @@
 				},
 				//
 				success: (res) => {
-//					console.log(res)
-//					console.log(res.data.objects);
 					this.data=res.data.objects[0];
-					if(this.data.eCondition==0&&this.data.eSex==0){
-						this.data.eCondition='离职';
-						this.data.eSex="女"
+					if(this.data.eCondition==0){
+						this.data.eCondition='离职';						
 					}else{
-						this.data.eCondition='在职';
-						this.data.eSex="男"
+						this.data.eCondition='在职';						
 					}
-//					console.log(this.data);
-					
+					if(this.data.eSex==0){						
+						this.data.eSex="女"
+						$("input[type='radio']").checked =  'checked';
+					}else{						
+						this.data.eSex="男"
+						$("input[type='radio']").checked =  'checked';
+					}	
 				},
 				error: (err) => {
 					console.log(err);
@@ -210,17 +181,13 @@
 			//
 			$.ajax({
 	 			url: 'http://localhost:8088/department/getAll',
-				method: "post",
-				
+				method: "post",				
 				success: (res) => {
-					         this.newdata=res.data;
-//					       console.log(res.data);	
-//                           console.log(this.newdata)
-					      },
-					      error: (err) => {
-					        console.log(err);
-					      },
-					      
+					this.newdata=res.data;
+				},
+			    error: (err) => {
+					console.log(err);
+				},					      
 	 		})
 			
 		}
@@ -229,24 +196,19 @@
 
 <style>
 	.infor_modify {
-		/*height: 82.5%;*/
-	}
-	
+	}	
 	.modify_header {
 		background: white;
 		height: 95%;
 		width: 90%;
 		margin: 10px auto;
-	}
-	
+	}	
 	.staff_link a {
 		color: #0F0F0F;
-	}
-	
+	}	
 	.staff_link {
 		padding: 20px 0 0 30px;
-	}
-	
+	}	
 	.row_col div {
 		margin-top: 5px;
 	}

@@ -68,21 +68,16 @@
 				if(this.ckey.trim()==''){
 					newdata=this.newdata;
 				}else{
-					newdata=this.newdata.filter((item)=>{
-						
+					newdata=this.newdata.filter((item)=>{						
 					    var value=((item.eName.includes(this.ckey.trim()))||
 					      (item.department_dName.includes(this.ckey.trim()))
 					    )
 					    if(value){
-//					    	console.log(item)
 					    	return item
-					    }
-					   
+					    }					   
 					})
 				}
-//				console.log(newdata)
-				 return newdata;
-				 
+				return newdata;				 
 			},
 		 	//删除员工
 			remove(data,index){
@@ -94,9 +89,6 @@
 					}
 				})
 				console.log(eindex)
-//				this.newdata.splice(data.eId,1)
-//				var params = new URLSearchParams()
-//				 params.append("eId",this.eId) 
 				 $.ajax({
 					      url: 'http://localhost:8088/employee/delete',
 					      method: "post",
@@ -104,10 +96,8 @@
 					      	"eId":this.eId,
 					      },
 					      success: (res) => {
-//					        console.log(res);
 					        if(res.success==true){
-					        	this.newdata.splice(eindex,1)
-//					        	window.location.href = 'http://localhost:8086/#//home/infor_staff'
+					        	this.newdata.splice(eindex,1)					        	
 					        	this.$router.push("/home/infor_staff")	
 					        }
 					      },
@@ -126,23 +116,19 @@
 		      // .then为请求成功的回调函数
 		        .then(function (response) {
 		            if (response.status === 200) {	
-		          	    isthis.newdata=response.data.data.objects;
-		          	    
-		          	     isthis.newdata.forEach((value,item,arr)=>{
-//		          	     	console.log(value)
-		          	    	if(value.eSex==1&&value.eCondition==1){
-		          	    		value.eSex="男"
-		          	    		value.eCondition="在职"
-		          	    	}else{
-		          	    		value.eSex="女"
-		          	    		value.eCondition="离职"
+		          	    isthis.newdata=response.data.data.objects;		          	    
+		          	    isthis.newdata.forEach((value,item,arr)=>{
+		          	    if(value.eSex==1){
+		          	    		value.eSex="男"		          	    		
+		          	        }else{
+		          	    		value.eSex="女"		          	    		
 		          	    	}
-		          	    	
-		          	    	
-		          	    })
-//		          	    console.log(newdata)
-//		          	     console.log(isthis.newdata)
-		       
+		          	    if(value.eCondition==1){		          	    		
+		          	    		value.eCondition="在职"
+		          	       }else{		          	    		
+		          	    		value.eCondition="离职"
+		          	    	}    
+		          	    })	       
 		          }
 		        })
 		        // .catch为请求失败的回调函数

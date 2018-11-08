@@ -51,13 +51,11 @@
 	.home_right_content .flex{
 		width: 23%;
 		height: 80%;
-		/*border: 1px solid #000000;*/
 		border-radius: 5px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		color: black;
-		
+		color: black;		
 	}
 	.font{
 		height: 70px;

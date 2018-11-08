@@ -85,7 +85,6 @@
 	.home_left_content{
 		background: #057fca;
 		height: 70%;
-		/*height: 480px;*/
 		padding-top: 38px;
 	}
 	.department .title,.staff .title,.chart .title{
@@ -93,8 +92,7 @@
 		overflow: hidden;
 		display: flex;
 		justify-content: center;
-		align-items: center;
-		
+		align-items: center;		
 	}
 	.font-circle,.font-circle1{
 		height: 30px;
@@ -115,10 +113,8 @@
 	.department,.staff,.chart{
 		color: white;
 	}
-	.staff{
-		color: white;
-	}
-	
+	.staff{		
+	}	
 	.black{
 		background: #263948;
 		margin: 0;
