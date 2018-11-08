@@ -24,7 +24,7 @@
 			 					<label class="text-right">性别：</label>
 			 				</div>
 			 				<div class="col-md-7 ">			 						
-			 					<input type="radio" name="inlineRadioOptions"   ref="eSex" v-model="eSex" checked value="男">男 
+			 					<input type="radio" name="inlineRadioOptions"   ref="eSex" v-model="eSex"  value="男" checked/>男 
 			 					<input type="radio" name="inlineRadioOptions"   ref="eSex" v-model="eSex" value="女">女 			 						
 			 				</div>
 			 					<!---->
