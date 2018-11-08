@@ -17,7 +17,7 @@
 		},
 		created(){
 			$.ajax({
-						url:'http://localhost:8086/employee/getList',
+						url:'http://localhost:8088/employee/getList',
 						method: "post",
 						success:(res)=>{	
 							let newdata=[]	 //接受部门名称(去重)

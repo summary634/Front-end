@@ -57,7 +57,7 @@ export default {
       let isthis = this
       this.$axios({
         method: 'post',
-        url: 'http://localhost:8086/department/update',
+        url: 'http://localhost:8088/department/update',
         data: {
           dId: isthis.id,
           dName: isthis.Dname,

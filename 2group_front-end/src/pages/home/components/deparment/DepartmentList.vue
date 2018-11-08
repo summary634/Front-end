@@ -97,7 +97,7 @@ export default {
       const isthis = this
       this.$axios({
         method: 'post',
-        url: 'http://localhost:8086/department/getAll',
+        url: 'http://localhost:8088/department/getAll',
         data: {
           dName: DepartmentName
         }
@@ -130,7 +130,7 @@ export default {
       const isthis = this
       this.$axios({
         method: 'post',
-        url: 'http://localhost:8086/employee/getList',
+        url: 'http://localhost:8088/employee/getList',
         data:{
           department_dId:bumenid
         }
@@ -154,7 +154,7 @@ export default {
       let isthis = this
       this.$axios({
         method: 'post',
-        url: 'http://localhost:8086/department/delete',
+        url: 'http://localhost:8088/department/delete',
         data: {
           from_dId: delbumenid,
           to_dId: selectbumenid

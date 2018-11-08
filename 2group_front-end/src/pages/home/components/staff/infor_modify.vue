@@ -155,7 +155,7 @@
                 }else{
                 	
                 	$.ajax({
-					url: 'http://localhost:8086/employee/update',
+					url: 'http://localhost:8088/employee/update',
 					method: "post",
 					data: {
 						eId: eId,
@@ -183,7 +183,7 @@
 			this.eId = this.$route.query.eId;
 			console.log(this.eId )
 			$.ajax({
-				url: "http://localhost:8086/employee/getList",
+				url: "http://localhost:8088/employee/getList",
 				method: "post",
 				data: {	
 					eId: this.eId,
@@ -209,7 +209,7 @@
 			})
 			//
 			$.ajax({
-	 			url: 'http://localhost:8086/department/getAll',
+	 			url: 'http://localhost:8088/department/getAll',
 				method: "post",
 				
 				success: (res) => {

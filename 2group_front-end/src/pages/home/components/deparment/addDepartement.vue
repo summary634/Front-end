@@ -74,7 +74,7 @@
           let isthis = this;
           this.$axios({
             method: 'post',
-            url: 'http://localhost:8086/department/add',
+            url: 'http://localhost:8088/department/add',
             data: {
               dName: isthis.Dname,
               dIntroduce: isthis.Dinfo,
